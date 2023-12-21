@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-outline-secondary text-left" href="{% url 'store:store' %}">&#8592; Store</a>
+        </div>
+        <div class="col">
+            <h1 class="display-4 flex-grow-1 text-center text-truncate">Order Summary</h1>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-4">
+        </div>
+
+        <div class="card col-4 align-items-center">
+            <div class="card-body">
+                <p class="my-5 text-center " style="font-size: 30px;">Thank for your purchase</p>
+                <!-- <br> -->
+                <div class="row">
+                    <ul class="list-unstyled">
+                        <li class="fw-bold"> {{order.first_name}} {{order.last_name}} </li>
+                        <li class="mt-1">Order ID: <span class="text-muted">#{{order.id}}</span></li>
+                        <li class="mt-1">Purchase date: <span class="text-muted">{{order.order_date}}</span></li>
+                    </ul>
+                </div>
+
+                <br>
+                {% for order_item in order_items %}
+                <div class="row">
+                    <hr>
+                    <div class="col-xl-10">
+                        <p> {{order_item.quantity}} x {{order_item.product.title}} </p>
+                    </div>
+                    <div class="col-xl-2">
+                        <p class="float-end">{{order_item.get_total|floatformat:2}}zł
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <br>
+                <div class="row">
+                    <hr style="border: 2px solid white;">
+                    <div class="col-xl-12">
+                        <p class="float-end fw-bold">Total: {{order.get_order_total|floatformat:2}}zł
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top: 90px;">
+                    <!-- <a><u class="text-info">View in browser</u></a> -->
+                    <a>See you again soon!</a>
+                    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p> -->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-4">
+        </div>
+    </div>
+    
+    <!-- <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            // Pobierz element o id "order-id"
+            var orderElement = document.getElementById('order-id');
+
+            // Pobierz tekst z elementu
+            var orderIdText = orderElement.textContent || orderElement.innerText;
+
+            // Podkreśl ostatnie 4 litery
+            var fragment_1 = str.substring(0, str.length - 4);
+            var fragment_2 = str.substring(str.length - 4, str.length);
+            
+            var updatedText = orderIdText.replace(fragment_1, '<span class="underline">' + fragment_2 + '</span>');
+
+            // Zaktualizuj tekst w elemencie
+            orderElement.innerHTML = updatedText;
+        });
+    </script> -->
+</div>
+
+{% endblock content %}

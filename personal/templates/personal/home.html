@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <img height="200" src="{% static 'images/logo1-white.png' %}" alt="Zacisze logo 1">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1 class="display-4">Welcome {{request.user.username}}!</h1>
+    <p class="lead"> Here are some popular books for you: </p>
+
+    {% if not request.user.is_superuser %}
+    {% if not request.user.is_admin %}
+    
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-lg-4" style="margin-top: 40px;">
+                <a href="{% url 'store:view_product' product.slug %}" style="text-decoration: none; color: lightgray;">
+                    <img class="thumbnail" src="{{product.image.url}}" title="{{product.title}}"
+                        style="width: 200px; height: 300px; object-fit: contain;">
+                    <div class="box-element product">
+                        <h6><strong>{{product.title}}</strong></h6>
+                        <h6><small>{{product.authors}}</small></h6>
+                        <hr>
+                        <div style="float: left;">
+
+                            {% if request.user.is_staff %}
+                            <!-- class="form-group d-flex justify-content-between" -->
+                            <div>
+                                <a class="btn btn-outline-warning add-btn"
+                                    href="{% url 'store:edit_product' product.slug %}" style="margin-right: 10px;">
+                                    Edit
+                                </a>
+                                <a class="btn btn-outline-danger add-btn"
+                                    href="{% url 'store:delete_product' product.slug %}">
+                                    Delete
+                                </a>
+                            </div>
+                            {% else %}
+                            <a class="btn btn-outline-secondary add-btn"
+                                href="{% url 'store:add_to_cart' product.slug %}">
+                                Add To Cart
+                            </a>
+                            {% endif %}
+
+                        </div>
+                        <div style="float: right;">
+                            <h4 style="display: inline-block;">{{product.price|floatformat:2}}zł</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+</div>
+
+{% endblock content %}

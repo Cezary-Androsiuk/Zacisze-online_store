@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <style type="text/css">
+        .form-signin {
+            max-width: 330px;
+            padding: 1rem;
+        }
+
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: 10px;
+        }
+
+        .form-signin input[type="username"] {
+            margin-bottom: 10px;
+        }
+
+        .h3 {
+            text-align: center;
+        }
+    </style>
+    <div class="form-signin w-100 m-auto">
+        <form class="form-singin" method="post"> {% csrf_token %}
+            <!-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+            <h1 class="h3 mb-3 fw-normal">Account</h1>
+
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email address"
+                required autofocus value="{{account_form.initial.email}}">
+            <input type="username" name="username" class="form-control" id="floatingUsername" placeholder="Username"
+                required value="{{account_form.initial.username}}"">
+    
+        {% for field in account_form %}
+            {% for error in field.errors %}
+                <p style=" color: red;"> {{error}} </p>
+            {% endfor %}
+            {% endfor %}
+
+            {% if account_form.non_field_errors %}
+            <div style="color: red;">
+                <p>{{account_form.non_field_errors}}</p>
+            </div>
+            {% endif %}
+
+            {% if success_message %}
+            <p style="color: green; text-align: center;">{{success_message}}</p>
+            {% endif %}
+
+            {% if request.user.is_superuser or request.user.is_admin or request.user.is_staff %}
+            <!-- account type checkboxes -->
+            <div class="form-check">
+                {% if request.user.is_superuser %}
+                <input class="form-check-input" disabled="disabled" type="checkbox" value="" id="flexCheckDefault"
+                    checked>
+                {% else %}
+                <input class="form-check-input" disabled="disabled" type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                <label class="form-check-label" for="flexCheckDefault">
+                    superuser
+                </label>
+            </div>
+            <div class="form-check">
+                {% if request.user.is_admin %}
+                <input class="form-check-input" disabled="disabled" type="checkbox" value="" id="flexCheckDefault"
+                    checked>
+                {% else %}
+                <input class="form-check-input" disabled="disabled" type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                <label class="form-check-label" for="flexCheckDefault">
+                    admin
+                </label>
+            </div>
+            <div class="form-check">
+                {% if request.user.is_staff %}
+                <input class="form-check-input" disabled="disabled" type="checkbox" value="" id="flexCheckDefault"
+                    checked>
+                {% else %}
+                <input class="form-check-input" disabled="disabled" type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                <label class="form-check-label" for="flexCheckDefault">
+                    stuff
+                </label>
+            </div>
+
+            <br />
+            {% endif %}
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Save changes</button>
+        </form>
+        <br />
+        <div class="d-flex flex-column">
+            <a class="m-auto" href="{% url 'password_change' %}">
+                Change Password
+            </a>
+        </div>
+
+
+    </div>
+
+    {% if request.user.is_authenticated %}
+    {% if not request.user.is_superuser %}
+    {% if not request.user.is_admin %}
+    {% if not request.user.is_staff %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <!-- <hr> -->
+        <div class="row">
+            <div class="col-6">
+                <div>
+                    <h5 class="text-center">Reservations</h5>
+                    {% include 'snippets/reservations_items_list.html' with account=True %}
+                </div>
+            </div>
+            <div class="col-6">
+                <div>
+                    <h5 class="text-center">Orders</h5>
+                    {% include 'snippets/orders_items_list.html' with account=True %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+</div>
+
+{% endblock content %}

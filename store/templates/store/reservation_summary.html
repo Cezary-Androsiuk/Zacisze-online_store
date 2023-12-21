@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+			<a class="btn btn-outline-secondary text-left" href="{% url 'store:store' %}">&#8592; Store</a>
+        </div>
+        <div class="col">
+            <h1 class="display-4 flex-grow-1 text-center text-truncate">Reservation Summary</h1>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-4">
+        </div>
+
+        <div class="card col-4 align-items-center">
+            <div class="card-body">
+                <p class="my-5 text-center " style="font-size: 30px;">Thank for your reservation</p>
+                <!-- <br> -->
+                <div class="row">
+                    <ul class="list-unstyled">
+                        <li class="fw-bold"> {{reservation.first_name}} {{reservation.last_name}} </li>
+                        <li class="mt-1">Reservation ID: <span class="text-muted">#{{reservation.id}}</span></li>
+                        <li class="mt-1">Purchase date: <span class="text-muted">{{reservation.reservation_date}}</span></li>
+                    </ul>
+                </div>
+
+                <br>
+                {% for reservation_item in reservation_items %}
+                <div class="row">
+                    <hr>
+                    <div class="col-xl-10">
+                        <p> {{reservation_item.quantity}} x {{reservation_item.product.title}} </p>
+                    </div>
+                    <div class="col-xl-2">
+                        <p class="float-end">{{reservation_item.get_total|floatformat:2}}zł
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <br>
+                <div class="row">
+                    <hr style="border: 2px solid white;">
+                    <div class="col-xl-12">
+                        <p class="float-end fw-bold">Total: {{reservation.get_reservation_total|floatformat:2}}zł
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top: 90px;">
+                    <!-- <a><u class="text-info">View in browser</u></a> -->
+                    <a>See you again soon!</a>
+                    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p> -->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

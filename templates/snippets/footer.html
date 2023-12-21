@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <!-- LEFT STUFF -->
+        <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 Projekt Inżynieria Oprogramowania 2 </p>
+
+        <!-- MIDDLE STUFF -->
+        <a href="{% url 'home' %}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" style="fill: white;">
+                <use xlink:href="#bootstrap"/>
+            </svg>
+            {% comment %}
+            <img height="40" src="{% static 'images/logo3-white.png' %}" alt="Zacisze logo 3">
+            {% endcomment %}
+        </a>
+
+        <!-- RIGHT STUFF -->
+        <ul class="nav col-md-4 justify-content-end">
+        {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+                <!-- superuser -->
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="\admin\" class="nav-link px-2 text-body-secondary">Admin</a></li>
+            {% elif request.user.is_admin %} 
+                <!-- admin -->
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+            {% elif request.user.is_staff %}
+                <!-- pracownik -->
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2 text-body-secondary">Store</a></li>
+                <li class="nav-item"><a href="{% url 'reservations_list' %}" class="nav-link px-2 text-body-secondary">Reservations</a></li>
+                <li class="nav-item"><a href="{% url 'orders_list' %}" class="nav-link px-2 text-body-secondary">Orders</a></li>
+            {% else %}
+                <!-- klient -->
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2 text-body-secondary">Store</a></li>
+                <li class="nav-item"><a href="{% url 'faqs' %}" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
+            {% endif %}
+        {% else %}
+            <!-- nie zarejestrowany użytkownik -->
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2 text-body-secondary">Store</a></li>
+            <li class="nav-item"><a href="{% url 'faqs' %}" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
+        {% endif %}
+        </ul>
+    </footer>
+</div>

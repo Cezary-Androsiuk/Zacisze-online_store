@@ -1,0 +1,108 @@
+{% load static %}
+
+<div class="container">
+
+    <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <!-- LEFT STUFF -->
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="{% url 'home' %}" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <div style="margin-bottom:-30px;">
+                    <img height="32" src="{% static 'images/logo2-white.png' %}" alt="Zacisze logo 2">
+                </div>
+                <!-- svg logo -->
+                <!-- <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap" />
+                </svg> -->
+            </a>
+        </div>
+
+        <!-- MIDDLE STUFF -->
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+            <!-- superuser -->
+            <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+            <li><a href="\admin\" class="nav-link px-2">Admin</a></li>
+            {% elif request.user.is_admin %}
+            <!-- admin -->
+            <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+            {% elif request.user.is_staff %}
+            <!-- pracownik -->
+            <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+            <li><a href="{% url 'store:store' %}" class="nav-link px-2">Store</a></li>
+            <li><a href="{% url 'reservations_list' %}" class="nav-link px-2">Reservations</a></li>
+            <li><a href="{% url 'orders_list' %}" class="nav-link px-2">Orders</a></li>
+            {% else %}
+            <!-- klient -->
+            <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+            <li><a href="{% url 'store:store' %}" class="nav-link px-2">Store</a></li>
+            <li><a href="{% url 'faqs' %}" class="nav-link px-2">FAQs</a></li>
+            <li><a href="{% url 'about' %}" class="nav-link px-2">About</a></li>
+            {% endif %}
+            {% else %}
+            <!-- nie zarejestrowany użytkownik -->
+            <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+            <li><a href="{% url 'store:store' %}" class="nav-link px-2">Store</a></li>
+            <li><a href="{% url 'faqs' %}" class="nav-link px-2">FAQs</a></li>
+            <li><a href="{% url 'about' %}" class="nav-link px-2">About</a></li>
+            {% endif %}
+        </ul>
+
+        <!-- RIGHT STUFF -->
+        <div class="col-md-3 text-end">
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+            <!-- superuser -->
+            <a href="{% url 'account' %}" class="btn btn-outline-primary">Account</a>
+            {% elif request.user.is_admin %}
+            <!-- admin -->
+            <a href="{% url 'account' %}" class="btn btn-outline-primary">Account</a>
+            {% elif request.user.is_staff %}
+            <!-- pracownik -->
+            <a href="{% url 'account' %}" class="btn btn-outline-primary">Account</a>
+            {% else %}
+            <!-- klient -->
+            <a href="{% url 'cart' %}" class="btn">
+                <i class="fa-solid fa-cart-shopping"
+                    style="color: lightgray; font-size: 30px; transform: translateY(2px); "></i>
+            </a>
+            <a href="{% url 'account' %}" class="btn btn-primary">Account</a>
+            {% endif %}
+
+
+            <button type="button" data-toggle="modal" data-target="#logoutModal"
+                class="btn btn-outline-danger me-2">Logout</button>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                <i class="fa-solid fa-arrow-right-from-bracket"
+                                    style="color: rgb(220, 53, 69); font-size: 20px;"></i>
+                                &nbsp; Logout
+                            </h5>
+                        </div>
+                        <div class="modal-body text-center">
+                            &nbsp; Are you sure to logout?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <a href="{% url 'logout' %}" type="button" class="btn btn-outline-danger">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+
+            <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-primary">Sign-up</a>
+
+            {% endif %}
+        </div>
+    </header>
+</div>

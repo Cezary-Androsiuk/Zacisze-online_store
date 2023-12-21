@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+{% if request.user.is_staff %}
+<div class="container">
+	<div class="mx-auto text-center d-flex align-items-center">
+		<div class="flex-grow-1 d-flex justify-content-start">
+			<a class="btn btn-outline-secondary" href="javascript:history.go(-1)">
+				&#8592; Back
+			</a>
+		</div>
+	</div>
+	<div class="d-flex flex-column">
+		<p class="m-auto">
+			Are you sure to delete product "{{product.title}}"
+				id={{product.product_id}}
+				{% if request.user != product.added_by %}
+				 added by {{product.added_by}}
+				{% endif %} ?
+		</p>
+	</div>
+
+	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+		<div class="container">
+			<div class="row justify-content-center"> <!-- Dodano justify-content-center -->
+				<div class="col-lg-4" style="margin-top: 40px;">
+					<!-- <h2> Preview </h2> -->
+					<img id="image_preview" src="{{product.image.url}}" alt="Preview" class="thumbnail" style="width: 200px; height: 300px; object-fit: contain;">
+					<div class="box-element product">
+						<h6><strong>{{product.title}}</strong></h6>
+						<h6><small>{{product.authors}}</span></small></h6>
+						<hr>
+						<div style="float: left;">
+							<button name="button_add_to_cart" class="btn btn-outline-secondary add-btn" value="">
+								Add To Cart
+							</button>
+						</div>
+						<div style="float: right;">
+							<h4 id="price_preview" style="display: inline-block;">{{product.price|floatformat:2}}zł</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+	<div class="d-flex justify-content-center align-items-center">
+		<a class="btn btn-lg btn-secondary" href="javascript:history.go(-1)" style="margin-right: 30px;">
+			Cancel
+		</a>
+		<a class="btn btn-lg btn-danger ml-2" href="{% url 'store:delete_product_confirmed' product.slug %}">
+			Delete
+		</a>
+	</div>
+		
+</div>
+{% endif %}
+{% endif %}
+
+{% endblock content %}

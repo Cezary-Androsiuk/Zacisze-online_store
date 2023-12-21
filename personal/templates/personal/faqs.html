@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">FAQs</h1>
+    <p class="lead"> Here are a few frequently asked questions along with their answers.</p>
+    <div class="container">
+        <div class="d-flex flex-column">
+            {% comment %}
+            {% for FAQ in FAQs %}
+                <h4>{{FAQ.number}}{{FAQ.question}}</h4>
+                <h4>{{FAQ.answer}}</h4>
+            {% endfor %}
+            {% endcomment %}
+        </div>
+    </div>
+</div> -->
+<section class="py-12 py-lg-24">
+    <div class="container">
+        <div class="mw-2xl mx-auto mb-24 text-center">
+            <h2 class="mb-4">Frequently Asked Questions</h2>
+            <p class="lead text-secondary-dark mb-0">Still have doubts? Here’s everything we think you should know.</p>
+            <br/>
+        </div>
+        <div class="mw-md mw-lg-none mx-auto mx-lg-0">
+            <div class="row mb-n14">
+                <div class="col-12 col-lg-6 mb-14">
+                    <div class="mw-xl">
+                        <span class="d-block fw-semibold mb-4">Czy w księgarni "Zacisze" dostępne są tylko książki, czy też można znaleźć inne artykuły związane z czytaniem?</span>
+                        <p class="text-secondary-dark">W "Zaciszu" oferujemy jedynie książki w formie papierowej, audio oraz e-book. Na chwilę obecną w naszej ofercie nie ma innych rzeczy.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-14">
+                    <div class="mw-xl">
+                        <span class="d-block fw-semibold mb-4">Czy można zamówić książki online i odebrać osobiście w księgarni?</span>
+                        <p class="text-secondary-dark">Tak, z przyjemnością oferujemy usługę zamówień online. Możesz przeglądać naszą ofertę na stronie internetowej, złożyć zamówienie i wybrać opcję odbioru osobistego w księgarni "Zacisze". Po otrzymaniu powiadomienia, że zamówienie jest gotowe, możesz je odebrać w dogodnym dla Ciebie czasie.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-14">
+                    <div class="mw-xl">
+                        <span class="d-block fw-semibold mb-4">Czy w księgarni "Zacisze" organizowane są jakieś wydarzenia kulturalne?</span>
+                        <p class="text-secondary-dark">Niestety, na chwilę obecną nie, ale nie wykluczamy tego w przyszłości.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-14">
+                    <div class="mw-xl">
+                        <span class="d-block fw-semibold mb-4">Jak mogę skontaktować się z obsługą klienta w przypadku pytań lub problemów?</span>
+                        <p class="text-secondary-dark"> Jesteśmy dostępni dla Ciebie! Możesz skontaktować się z naszą obsługą klienta poprzez e-mail pod adresem info@zacisze-ksiegarnia.pl lub telefonicznie pod numerem +48 123 456 789. Chętnie pomożemy rozwiązać wszelkie pytania lub problemy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

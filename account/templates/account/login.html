@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style type="text/css">
+    .form-signin {
+        max-width: 330px;
+        padding: 1rem;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: 10px;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+    }
+
+    .h3 {
+        text-align: center;
+    }
+</style>
+<div class="form-signin w-100 m-auto">
+    <form class="form-singin" method="POST"> {% csrf_token %}
+        <!-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Email address" required
+            autofocus>
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password"
+            required>
+
+        {% for field in login_form %}
+        {% for error in field.errors %}
+        <p style="color: red;"> {{error}} </p>
+        {% endfor %}
+        {% endfor %}
+
+        {% if login_form.non_field_errors %}
+        <div style="color: red;">
+            <p>{{login_form.non_field_errors}}</p>
+        </div>
+        {% endif %}
+        <br />
+
+        <button id="submit_login_button" class="btn btn-primary w-100 py-2" type="submit">Log in</button>
+    </form>
+    <br />
+    <div class="d-flex flex-column">
+        <a class="m-auto" href="{% url 'password_reset' %}">
+            Reset Password
+        </a>
+    </div>
+
+
+
+
+
+
+    {% if debug_mode %}
+
+    <br>
+    <br>
+
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Select Account
+        </button>
+
+        <!-- Dropdown menu -->
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            
+            {% for account in registered_accounts %}
+            <a class="dropdown-item" href="#">{{account}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <h4>Available accounts:</h4>
+    <div class="container">
+        <div class="d-flex flex-column">
+            {% for account in registered_accounts %}
+            <h4>{{account}}</h4>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var dropdown = $('.dropdown');
+
+            dropdown.find('.dropdown-item').on('click', function () {
+                var selectedOption = $(this).text();
+                var pass = 'Password1234!'
+                if(selectedOption == 'czandros@wp.pl'){
+                    pass = 'czarek'
+                }
+
+                $('#floatingInput').val(selectedOption);
+                $('#floatingPassword').val(pass);
+
+                document.getElementById('submit_login_button').click();
+
+            });
+        });
+    </script>
+
+    {% endif %}
+</div>
+
+{% endblock content %}

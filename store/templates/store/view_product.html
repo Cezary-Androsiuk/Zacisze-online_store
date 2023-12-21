@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+	<div class="mx-auto text-center d-flex align-items-center">
+        <div class="flex-grow-1 d-flex justify-content-start">
+            <a class="btn btn-outline-secondary" href="{% url 'store:store' %}">
+                &#8592; Back
+            </a>
+        </div>
+        {% if request.user.is_staff %}
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-warning add-btn" href="{% url 'store:edit_product' product.slug %}" style="margin-right: 10px;">
+                Edit Product
+            </a>
+            <a class="btn btn-outline-danger add-btn" href="{% url 'store:delete_product' product.slug %}">
+                Delete Product
+            </a>
+        </div>
+        {% else %}
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-light" href="{% url 'store:add_to_cart' product.slug %}">
+                Add To Cart
+            </a>
+        </div>
+        {% endif %}
+        <!-- <h1 class="display-4 flex-grow-1">Product</h1> -->
+    </div>
+    <br>
+    
+    {% if success_update_message %}
+        <h3 style="color: green; text-align: center;"> {{success_update_message}} </h3>
+    {% endif %}
+	<div class="mx-auto text-center d-flex align-items-center">
+        <img class="thumbnail" src="{{product.image.url}}" title="{{product.title}}" style="width: 600px; height: 800px; object-fit: contain;">
+        <div class="display-4 flex-grow-1">
+            <h1 class="display-5 flex-grow-1">{{product.title}}</h1>
+            <h3 class="flex-grow-1" 
+                style="font-size: 20px; font-weight: lighter; color: rgba(255,255,255, 0.5); word-wrap: break-word; white-space: pre-wrap;">
+                Authors: {{product.authors}}
+            </h3>
+            <div style="text-align: right;">
+                <h3 class="display-7">{{product.price|floatformat:2}}zł</h3>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p class="lead text-muted" style="text-align: left; margin-left: 50px; margin-right: 50px; word-wrap: break-word; white-space: pre-wrap;">
+        {{product.description|safe}}
+    </p>
+    <br>
+    
+</div>
+
+{% endblock content %}
