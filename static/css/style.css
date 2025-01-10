@@ -1,3 +1,474 @@
 .debug-border{
     border: 1px solid white;
 }
+.logo{
+    fill: white;
+}
+/* make sure that footer allways will be at the bottom of window */
+.main {
+    min-height: 100vh;
+    height: 100%
+}
+
+
+
+/* account */
+/* account.html */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="username"] {
+    margin-bottom: 10px;
+}
+
+.h3 {
+    text-align: center;
+}
+
+/* account */
+/* login.html */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+}
+
+.h3 {
+    text-align: center;
+}
+
+/* account */
+/* register.html */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[name="password1"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[name="password2"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.h3{
+    text-align: center;
+}
+
+/* store */
+/* create_product.html */
+.create-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+
+.submit-button {
+    max-width: 200px;
+}
+
+
+/* store */
+/* edit_product.html */
+.create-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+
+.submit-button {
+    max-width: 200px;
+}
+
+/* store */
+/* orders_list.html */
+.career-form .form-control {
+    /* search bar */
+    border: 0;
+    padding: 12px 15px;
+}
+
+.career-form .custom-select {
+    /* select */
+    border: 0;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: left;
+    height: auto;
+    background-image: none;
+}
+
+.good-look {
+    background-color: rgba(33, 37, 41);
+    border-radius: 5px;
+}
+
+.component-border {
+    border: 2px solid rgb(13, 110, 253);
+    border-radius: 5px;
+}
+
+.chbox-look {
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-order-look {
+    font-size: 28px;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-delivered-look {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid rgb(13, 110, 253);
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.chbox-label {
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+/* store */
+/* reservations_list.html */
+.career-form .form-control {
+    /* search bar */
+    border: 0;
+    padding: 12px 15px;
+}
+
+.career-form .custom-select {
+    /* select */
+    border: 0;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: left;
+    height: auto;
+    background-image: none;
+}
+
+.good-look {
+    background-color: rgba(33, 37, 41);
+    border-radius: 5px;
+}
+
+.component-border {
+    border: 2px solid rgb(13, 110, 253);
+    border-radius: 5px;
+}
+
+.chbox-look {
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-reservation-look {
+    font-size: 28px;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-received-look {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid rgb(13, 110, 253);
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.chbox-label {
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+/* templates registration */
+/* password_change.html */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[name="new_password1"] {
+margin-bottom: -1px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+}
+
+.form-signin input[name="new_password2"] {
+margin-bottom: -1px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+
+.h3 {
+    text-align: center;
+}
+
+
+/* templates registration */
+/* password_reset_form.html */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+}
+
+.h3 {
+    text-align: center;
+}
+
+
+/* templates registration */
+/* password_reset.html */
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+}
+
+.form-signin input[name="new_password1"] {
+margin-bottom: -1px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+}
+
+.form-signin input[name="new_password2"] {
+margin-bottom: -1px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+
+.h3 {
+    text-align: center;
+}
+
+
+/* templates snippets */
+/* order_items_list.html */
+/* i will just copy this from "orders_list.html" cause i don't have time to clean this code :< */
+.career-form .form-control {
+    /* search bar */
+    border: 0;
+    padding: 12px 15px;
+}
+
+.career-form .custom-select {
+    /* select */
+    border: 0;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: left;
+    height: auto;
+    background-image: none;
+}
+
+.good-look {
+    background-color: rgba(33, 37, 41);
+    border-radius: 5px;
+}
+
+.component-border {
+    border: 2px solid rgb(13, 110, 253);
+    border-radius: 5px;
+}
+
+.chbox-look {
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-order-look {
+    font-size: 28px;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-delivered-look {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid rgb(13, 110, 253);
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.chbox-label {
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+
+/* templates snippets */
+/* reservations_items_list.html */
+/* i will just copy this from "reservations_list.html" cause i don't have time to clean this code :< */
+.career-form .form-control {
+    /* search bar */
+    border: 0;
+    padding: 12px 15px;
+}
+
+.career-form .custom-select {
+    /* select */
+    border: 0;
+    padding: 12px 15px;
+    width: 100%;
+    text-align: left;
+    height: auto;
+    background-image: none;
+}
+
+.good-look {
+    background-color: rgba(33, 37, 41);
+    border-radius: 5px;
+}
+
+.component-border {
+    border: 2px solid rgb(13, 110, 253);
+    border-radius: 5px;
+}
+
+.chbox-look {
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-reservation-look {
+    font-size: 28px;
+    border: 2px solid rgb(13, 110, 253);
+}
+
+.chbox-received-look {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid rgb(13, 110, 253);
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.chbox-label {
+    cursor: default;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
