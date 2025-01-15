@@ -1,0 +1,44 @@
+{% load static %}
+
+{% if request.user.is_superuser %} <!-- superuser -->
+    <a href="{% url 'account' %}" class="btn btn-outline-primary">Account</a>
+
+{% elif request.user.is_admin %} <!-- admin -->
+    <a href="{% url 'account' %}" class="btn btn-outline-primary">Account</a>
+
+{% elif request.user.is_staff %} <!-- staff -->
+    <a href="{% url 'account' %}" class="btn btn-outline-primary">Account</a>
+
+{% else %} <!-- customer -->
+    <a href="{% url 'cart' %}" class="btn">
+        <i class="fa-solid fa-cart-shopping"
+            style="color: lightgray; font-size: 30px; transform: translateY(2px); "></i>
+    </a>
+    <a href="{% url 'account' %}" class="btn btn-primary">Account</a>
+
+{% endif %}
+
+<button type="button" data-toggle="modal" data-target="#logoutModal"
+class="btn btn-outline-danger me-2">Logout</button>
+
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fa-solid fa-arrow-right-from-bracket"
+                        style="color: rgb(220, 53, 69); font-size: 20px;"></i>
+                    &nbsp; Logout
+                </h5>
+            </div>
+            <div class="modal-body text-center">
+                &nbsp; Are you sure to logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="{% url 'logout' %}" type="button" class="btn btn-outline-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'personal',
     'account',
     'store',
+    'slider',
 ]
 
 MIDDLEWARE = [
