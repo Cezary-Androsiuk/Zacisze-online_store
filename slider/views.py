@@ -22,16 +22,15 @@ from account.models import (
     Account,
 )
 
-
-def slider_view(request):
-    return render(request, "store/store.html", {})
+# def slider_view(request):
+#     return render(request, "store/store.html", {})
 
 
 def manage_sliders_view(request):
     context = {}
-    # user = request.user
-    # if not user.is_authenticated or not user.is_staff:
-    #     return redirect('must_authenticate')
+    user = request.user
+    if not user.is_authenticated or not user.is_staff:
+        return redirect('must_authenticate')
     
     # get all sliders
     # products = Product.objects.all()
@@ -42,6 +41,6 @@ def manage_sliders_view(request):
     #     product.title = product.title[:40] + '...' if len(product.title) > 40 else product.title
     #     product.authors = product.authors[:50] + '...' if len(product.authors) > 50 else product.authors
 
-    # context = {'sliders': ['slider1', 'slider2']}
-    return render(request, "slider/manage_sliders.html", context)
+    context = {'sliders': ['slider1', 'slider2']}
+    return render(request, "manage_sliders.html", context)
 

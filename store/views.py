@@ -41,18 +41,31 @@ def store_view(request):
 
 
 def create_product_view(request):
+    print(request)
     context = {}
     user = request.user
     if not user.is_authenticated or not user.is_staff:
         return redirect('must_authenticate')
     
-    # what will be send while submiting a form
+    # what will be send while submitting a form
     form = CreateProductForm(request.POST or None, request.FILES or None)
+
     if form.is_valid():
-        obj = form.save(commit=False) # commit to have time to add author after we check if form is valid
-        obj.added_by = Account.objects.filter(email=user.email).first()
-        obj.save() # save created object to db
-        return redirect('store:store')
+        productExist = Product.objects.filter(title=form.getTitle()).exists() # check if product with that name exist
+        if productExist:
+            # print("product exist :<")
+            # context['error_info'] = "product already exist"
+            pass
+        else:
+            obj = form.save(commit=False) # commit to have time to add author after we check if form is valid
+            obj.added_by = Account.objects.filter(email=user.email).first()
+            obj.save() # save created object to db
+            return redirect('store:store')
+    else:
+        # print("form invalid :<")
+        # context['error_info'] = "form invalid"
+        pass
+
     
     context['form'] = form
     return render(request, 'store/create_product.html', context)

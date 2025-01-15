@@ -34,7 +34,7 @@ def home_screen_view(request):
         else:
             products_count[product.title] = item.quantity
 
-    print(products_count)
+    # print(products_count)
     products_count = sorted(products_count.items(), key=lambda x: x[1], reverse=True)
 
     products = []

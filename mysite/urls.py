@@ -49,7 +49,7 @@ urlpatterns = [
     
     path('', home_screen_view, name='home'),
     path('store/', include('store.urls', 'store')),
-    # path('slider/', include('slider.urls', 'slider')),
+    path('slider/', include('slider.urls', 'slider')),
     
     path('login/', login_view, name='login'),
     path('register/', registration_view, name='register'),

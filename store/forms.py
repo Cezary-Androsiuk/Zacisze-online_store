@@ -14,6 +14,8 @@ class CreateProductForm(forms.ModelForm):
         # fields that user are able to setup while filling the form
         fields = ['title', 'authors', 'description', 'image', 'price']
 
+    def getTitle(self):
+        return self.cleaned_data.get('title')
         
 class UpdateProductForm(forms.ModelForm):
 
