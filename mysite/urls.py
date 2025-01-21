@@ -23,6 +23,7 @@ from personal.views import (
     home_screen_view,
     faqs_view,
     about_view,
+    color_view,
 )
 
 from account.views import (
@@ -68,6 +69,7 @@ urlpatterns = [
 
     path('faqs/', faqs_view, name='faqs'),
     path('about/', about_view, name='about'),
+    path('colors/', color_view, name='colors'),
     
     
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)

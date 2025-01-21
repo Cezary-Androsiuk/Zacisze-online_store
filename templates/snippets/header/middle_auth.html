@@ -1,23 +1,25 @@
 {% load static %}
 
 {% if request.user.is_superuser %} <!-- superuser -->
-    <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
-    <li><a href="\admin\" class="nav-link px-2">Admin</a></li>
+    <li><a href="{% url 'home' %}" class="nav-link px-2 header-text">Home</a></li>
+    <li><a href="{% url 'colors' %}" class="nav-link px-2 header-text">Colors</a></li>
+    <li><a href="\admin\" class="nav-link px-2 header-text">Admin</a></li>
 
 {% elif request.user.is_admin %} <!-- admin -->
-    <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+    <li><a href="{% url 'home' %}" class="nav-link px-2 header-text">Home</a></li>
+    <li><a href="{% url 'colors' %}" class="nav-link px-2 header-text">Colors</a></li>
 
 {% elif request.user.is_staff %} <!-- staff -->
-    <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
-    <li><a href="{% url 'slider:manage_sliders' %}" class="nav-link px-2">Slider</a></li>
-    <li><a href="{% url 'store:store' %}" class="nav-link px-2">Store</a></li>
-    <li><a href="{% url 'reservations_list' %}" class="nav-link px-2">Reservations</a></li>
-    <li><a href="{% url 'orders_list' %}" class="nav-link px-2">Orders</a></li>
+    <li><a href="{% url 'home' %}" class="nav-link px-2 header-text">Home</a></li>
+    <li><a href="{% url 'slider:manage_sliders' %}" class="nav-link px-2 header-text">Slider</a></li>
+    <li><a href="{% url 'store:store' %}" class="nav-link px-2 header-text">Store</a></li>
+    <li><a href="{% url 'reservations_list' %}" class="nav-link px-2 header-text">Reservations</a></li>
+    <li><a href="{% url 'orders_list' %}" class="nav-link px-2 header-text">Orders</a></li>
 
 {% else %} <!-- customer -->
-    <li><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
-    <li><a href="{% url 'store:store' %}" class="nav-link px-2">Store</a></li>
-    <li><a href="{% url 'faqs' %}" class="nav-link px-2">FAQs</a></li>
-    <li><a href="{% url 'about' %}" class="nav-link px-2">About</a></li>
+    <li><a href="{% url 'home' %}" class="nav-link px-2 header-text">Home</a></li>
+    <li><a href="{% url 'store:store' %}" class="nav-link px-2 header-text">Store</a></li>
+    <li><a href="{% url 'faqs' %}" class="nav-link px-2 header-text">FAQs</a></li>
+    <li><a href="{% url 'about' %}" class="nav-link px-2 header-text">About</a></li>
 
 {% endif %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from account.models import (
     Account
@@ -56,3 +56,12 @@ def about_view(request):
     context = {}
 
     return render(request, "personal/about.html", context)
+
+
+def color_view(request):
+    context = {}
+    user = request.user
+    if not user.is_authenticated or not user.is_admin:
+        return redirect('must_authenticate')
+
+    return render(request, "personal/colors.html", context)
