@@ -3,7 +3,7 @@
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <!-- LEFT STUFF -->
-        <p class="col-md-4 mb-0 text-body-secondary">&copy; 2025 Projektowanie aplikacji internetowych </p>
+        <p class="col-md-4 mb-0" style="color: var(--color-3)">&copy; 2025 Projektowanie aplikacji internetowych </p>
 
         <!-- MIDDLE STUFF -->
         <a href="{% url 'home' %}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -20,30 +20,30 @@
         {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
                 <!-- superuser -->
-                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-                <li class="nav-item"><a href="\admin\" class="nav-link px-2 text-body-secondary">Admin</a></li>
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2" style="color: var(--color-3)">Home</a></li>
+                <li class="nav-item"><a href="\admin\" class="nav-link px-2" style="color: var(--color-3)">Admin</a></li>
             {% elif request.user.is_admin %} 
                 <!-- admin -->
-                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2" style="color: var(--color-3)">Home</a></li>
             {% elif request.user.is_staff %}
                 <!-- pracownik -->
-                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-                <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2 text-body-secondary">Store</a></li>
-                <li class="nav-item"><a href="{% url 'reservations_list' %}" class="nav-link px-2 text-body-secondary">Reservations</a></li>
-                <li class="nav-item"><a href="{% url 'orders_list' %}" class="nav-link px-2 text-body-secondary">Orders</a></li>
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2" style="color: var(--color-3)">Home</a></li>
+                <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2" style="color: var(--color-3)">Store</a></li>
+                <li class="nav-item"><a href="{% url 'reservations_list' %}" class="nav-link px-2" style="color: var(--color-3)">Reservations</a></li>
+                <li class="nav-item"><a href="{% url 'orders_list' %}" class="nav-link px-2" style="color: var(--color-3)">Orders</a></li>
             {% else %}
                 <!-- klient -->
-                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-                <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2 text-body-secondary">Store</a></li>
-                <li class="nav-item"><a href="{% url 'faqs' %}" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2" style="color: var(--color-3)">Home</a></li>
+                <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2" style="color: var(--color-3)">Store</a></li>
+                <li class="nav-item"><a href="{% url 'faqs' %}" class="nav-link px-2" style="color: var(--color-3)">FAQs</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2" style="color: var(--color-3)">About</a></li>
             {% endif %}
         {% else %}
             <!-- nie zarejestrowany użytkownik -->
-            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2 text-body-secondary">Store</a></li>
-            <li class="nav-item"><a href="{% url 'faqs' %}" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2" style="color: var(--color-3)">Home</a></li>
+            <li class="nav-item"><a href="{% url 'store:store' %}" class="nav-link px-2" style="color: var(--color-3)">Store</a></li>
+            <li class="nav-item"><a href="{% url 'faqs' %}" class="nav-link px-2" style="color: var(--color-3)">FAQs</a></li>
+            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2" style="color: var(--color-3)">About</a></li>
         {% endif %}
         </ul>
     </footer>
