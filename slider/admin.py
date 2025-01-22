@@ -1,9 +1,9 @@
 from django.contrib import admin
-# from slider.models import (
-#     # SliderItem,
-#     Slider,
-# )
+from .models import (
+    SliderImage, 
+    Slider
+)
 
 # Register your models here.
-# admin.site.register(SliderItem)
-# admin.site.register(Slider)
+admin.site.register(SliderImage)
+admin.site.register(Slider)

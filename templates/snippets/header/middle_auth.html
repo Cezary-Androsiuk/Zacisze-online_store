@@ -11,13 +11,16 @@
 
 {% elif request.user.is_staff %} <!-- staff -->
     <li><a href="{% url 'home' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Home</a></li>
-    <li><a href="{% url 'slider:manage_sliders' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Slider</a></li>
+    <!-- <li><a href="" class="nav-link px-2 header-text" style="color: var(--color-3)">Slider</a></li> -->
+    <li><a href="{% url 'slider:upload_image' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">upload_image</a></li>
+    <li><a href="{% url 'slider:admin_slider' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">admin_slider</a></li>
     <li><a href="{% url 'store:store' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Store</a></li>
     <li><a href="{% url 'reservations_list' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Reservations</a></li>
     <li><a href="{% url 'orders_list' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Orders</a></li>
 
 {% else %} <!-- customer -->
     <li><a href="{% url 'home' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Home</a></li>
+    <li><a href="{% url 'slider:user_slider' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">user_slider</a></li>
     <li><a href="{% url 'store:store' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">Store</a></li>
     <li><a href="{% url 'faqs' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">FAQs</a></li>
     <li><a href="{% url 'about' %}" class="nav-link px-2 header-text" style="color: var(--color-3)">About</a></li>

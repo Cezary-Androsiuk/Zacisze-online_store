@@ -1,9 +1,5 @@
 from django.db import models
 
-from store.models import (
-    Product
-)
-
 # class SliderItem(models.Model):
 #     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
 #     order = models.PositiveIntegerField(default=0)
@@ -16,3 +12,13 @@ from store.models import (
     
 # class Sliders(models.Model):
 #     sliders = models.
+
+class SliderImage(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='slider_images/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    
+class Slider(models.Model):
+    name = models.CharField(max_length=255)
+    images = models.ManyToManyField(SliderImage)
+    created_at = models.DateTimeField(auto_now_add=True)

@@ -1,10 +1,7 @@
 from django import forms
-from django.forms.models import modelformset_factory
-from .models import Slider
+from .models import SliderImage
 
-class SliderForm(forms.ModelForm):
+class SliderImageForm(forms.ModelForm):
     class Meta:
-        model = Slider
-        fields = ['order']
-
-SliderFormSet = modelformset_factory(Slider, form=SliderForm, extra=0)
+        model = SliderImage
+        fields = ['title', 'image']

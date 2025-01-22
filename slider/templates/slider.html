@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <label style="margin-bottom: 10px;">
+            Current Slider:
+        </label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+                {% for slider in sliders %}
+                <li><a class="dropdown-item" href="#">{{slider}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    
+    
+</div>
+{% endblock content %}

@@ -22,8 +22,8 @@ from account.models import (
     Account,
 )
 
-# def slider_view(request):
-#     return render(request, "store/store.html", {})
+def slider_view(request):
+    return render(request, "store/store.html", {})
 
 
 def manage_sliders_view(request):
@@ -44,3 +44,28 @@ def manage_sliders_view(request):
     context = {'sliders': ['slider1', 'slider2']}
     return render(request, "manage_sliders.html", context)
 
+
+
+
+# from django.shortcuts import render, redirect
+from .models import SliderImage, Slider
+from .forms import SliderImageForm
+
+def upload_image(request):
+    print("uploading image")
+    if request.method == 'POST':
+        form = SliderImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('upload_image')
+    else:
+        form = SliderImageForm()
+    return render(request, 'upload_image.html', {'form': form})
+
+def admin_slider(request):
+    images = SliderImage.objects.all()
+    return render(request, 'admin_slider.html', {'images': images})
+
+def user_slider(request):
+    slider = Slider.objects.first()
+    return render(request, 'user_slider.html', {'slider': slider})

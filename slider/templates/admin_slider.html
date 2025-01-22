@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Admin Slider</h1>
+{% for image in images %}
+    <img src="{{ image.image.url }}" width="100" />
+{% endfor %}
+{% endblock content %}
