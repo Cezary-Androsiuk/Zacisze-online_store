@@ -23,7 +23,7 @@ header-text{
     color: var(--color-3);
 }
 
-
+/* 
 .slider {
     display: flex;
     overflow: hidden;
@@ -31,7 +31,7 @@ header-text{
 .slide {
     max-width: 100%;
     transition: transform 1s ease;
-}
+} */
 
 
 .debug-border{

@@ -48,11 +48,12 @@ def manage_sliders_view(request):
 
 
 # from django.shortcuts import render, redirect
-from .models import SliderImage, Slider
+from .models import SliderImage
 from .forms import SliderImageForm
 
+# import pprint
+
 def upload_image(request):
-    print("uploading image")
     if request.method == 'POST':
         form = SliderImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -63,9 +64,14 @@ def upload_image(request):
     return render(request, 'upload_image.html', {'form': form})
 
 def admin_slider(request):
-    images = SliderImage.objects.all()
-    return render(request, 'admin_slider.html', {'images': images})
+    print("slider loaded, request:")
+    # pp = pprint.PrettyPrinter(indent=4)
+    # pp.pprint(vars(request))
+    sliderImages = SliderImage.objects.all();
+    print(sliderImages)
+    return render(request, 'admin_slider.html', {'images': sliderImages})
 
 def user_slider(request):
-    slider = Slider.objects.first()
-    return render(request, 'user_slider.html', {'slider': slider})
+    sliderImages = SliderImage.objects.filter(isInSlider = True);
+    print(sliderImages)
+    return render(request, 'user_slider.html', {'images': sliderImages})

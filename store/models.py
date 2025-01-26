@@ -249,3 +249,14 @@ class ReservationItem(models.Model):
 
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=False, blank=False)
+    product = models.ManyToManyField(Product)
+    content = models.TextField()
+    confirmed = models.BooleanField(default=False)
+
+    isSubComment = models.BooleanField(default=False)
+    parentComment = models.ForeignKey('Comment', on_delete=models.CASCADE, null=True, blank=True, default=None)
+
+    def __str__(self):
+        return f'Comment for {self.product} by {self.user}'
