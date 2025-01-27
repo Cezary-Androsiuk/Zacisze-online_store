@@ -50,6 +50,70 @@
         {{product.description|safe}}
     </p>
     <br>
+
+    <div>
+        {% for comment in comments %}
+            <p>{{ comment.user.email }}</p>
+            <p>{{ comment.content }}</p>
+            {% if comment.confirmed is False %}
+                <p><small>Approved {{ comment.confirmed }}</small></p>
+                <form method="post" action="{% url 'store:confirm_comment' comment.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Approve</button>
+                </form>
+            {% endif %}
+            {% if not comment.replays.all %}
+            
+            {% else %}
+                {% for reply in comment.replays.all %}
+                    <p>{{ reply.user.email }}</p>
+                    <p>{{ reply.content }}</p>
+                {% endfor %}
+            {% endif %}
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+
+        <!-- <h2>Comments</h2>
+        <h3>Add a Comment</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" name="comment_form">Submit</button>
+            </form>
+
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.user.username }}</strong> said:</p>
+                <p>{{ comment.content }}</p>
+                <p><small>Posted on {{ comment.created_at }}</small></p>
+                {% if comment.reply %}
+                    <p><strong>Moderator reply:</strong> {{ comment.reply }}</p>
+                {% endif %}
+                {% if comment.approved is False %}
+                    <p><small>Approved {{ comment.approved }}</small></p>
+                    {% if permission_comments %}
+                        <div class="reply-form">
+                            <form method="post" action="{% url 'product_detail' product.id %}">
+                                {% csrf_token %}
+                                <textarea name="reply" rows="3" required></textarea>
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                <button type="submit">Reply</button>
+                            </form>
+                        </div>
+                        <form method="post" action="{% url 'approve_comment' comment.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Approve</button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %} -->
+
+
+    </div>
     
 </div>
 

@@ -7,6 +7,8 @@ from store.models import (
     OrderItem,
     Reservation,
     ReservationItem,
+    Comment,
+    Replay
 )
 
 admin.site.register(Product)
@@ -19,3 +21,6 @@ admin.site.register(OrderItem)
 
 admin.site.register(Reservation)
 admin.site.register(ReservationItem)
+
+admin.site.register(Comment)
+admin.site.register(Replay)

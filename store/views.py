@@ -3,15 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.conf import settings
 
 
-from store.models import (
-    Product,
-    Cart,
-    CartItem,
-    Order,
-    OrderItem,
-    Reservation,
-    ReservationItem,
-)
+from store.models import *
 from store.forms import (
     CreateProductForm,
     UpdateProductForm,
@@ -29,10 +21,15 @@ def store_view(request):
     # delete product feature
     products = Product.objects.all()
     # products = Product.objects.filter(is_deleted=False)
-    
     for product in products:
         product.title = product.title[:40] + '...' if len(product.title) > 40 else product.title
         product.authors = product.authors[:50] + '...' if len(product.authors) > 50 else product.authors
+        
+        if request.user.is_staff:
+            relatedComments = Comment.objects.filter(product=product)
+            product.containsNotConfirmedComments = relatedComments.count()
+        else:
+            product.containsNotConfirmedComments = 0
 
     context = {'products': products}
     return render(request, "store/store.html", context)
@@ -74,8 +71,13 @@ def create_product_view(request):
 def view_product_view(request, slug):
     context = {}
     product = get_object_or_404(Product, slug=slug)
+    if request.user.is_staff:
+        comments = Comment.objects.filter(product=product)
+    else:
+        comments = Comment.objects.filter(product=product, confirmed=True)
     
     context['product'] = product
+    context['comments'] = comments
     
     success_update_message = request.session.get('success_update_message')
     if success_update_message:
@@ -120,6 +122,16 @@ def edit_product_view(request, slug):
     return render(request, 'store/edit_product.html', context)
 
 
+
+def confirm_comment_view(request, comment_id):
+    user = request.user
+    if not user.is_authenticated or not user.is_staff:
+        return redirect('must_authenticate')
+    
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.confirmed = True
+    comment.save()
+    return redirect('store:view_product', slug=comment.product.slug)
 
 
 

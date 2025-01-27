@@ -30,6 +30,7 @@ class Product(models.Model):
     slug = models.SlugField(blank=True, unique=True)
 
     is_deleted = models.BooleanField(null=False, blank=True, default=False)
+    containsNotConfirmedComments = models.PositiveIntegerField(null=False, blank=True, default=0)
     
     def __str__(self):
         return f'ID: {str(self.product_id)},  TITLE: "{self.title}", ADDED_BY: {self.added_by.email}'
@@ -250,13 +251,19 @@ class ReservationItem(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=False, blank=False)
-    product = models.ManyToManyField(Product)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='comments', null=False, blank=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', null=False, blank=False)
     content = models.TextField()
     confirmed = models.BooleanField(default=False)
 
-    isSubComment = models.BooleanField(default=False)
-    parentComment = models.ForeignKey('Comment', on_delete=models.CASCADE, null=True, blank=True, default=None)
+    def __str__(self):
+        return f'target {self.product} by {self.user}'
+
+class Replay(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='replays', null=False, blank=False)
+    parentComment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replays', null=False, blank=False)
+    content = models.TextField()
 
     def __str__(self):
-        return f'Comment for {self.product} by {self.user}'
+        return f'target {self.parentComment} by {self.user}'
+    

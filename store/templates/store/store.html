@@ -47,6 +47,10 @@
                             {% endif %}
 
                         </div>
+                        {% if product.containsNotConfirmedComments > 0 %}
+                            ❗
+                        {% endif %}
+
                         <div style="float: right;">
                             <h4 style="display: inline-block;">{{product.price|floatformat:2}}zł</h4>
                         </div>
