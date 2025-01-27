@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.conf import settings
 
@@ -58,7 +58,7 @@ def upload_image(request):
         form = SliderImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('upload_image')
+            return redirect('slider:upload_image')
     else:
         form = SliderImageForm()
     return render(request, 'upload_image.html', {'form': form})
@@ -69,9 +69,23 @@ def admin_slider(request):
     # pp.pprint(vars(request))
     sliderImages = SliderImage.objects.all();
     print(sliderImages)
-    return render(request, 'admin_slider.html', {'images': sliderImages})
+    return render(request, 'admin_slider.html', {'slider_images': sliderImages})
+
+def change_slider_view(request, slider_image_id):
+    user = request.user
+    if not user.is_authenticated or not user.is_staff:
+        return redirect('must_authenticate')
+    
+    sliderImage = get_object_or_404(SliderImage, id=slider_image_id)
+    if request.method == "POST":
+        isInSliderCheckBox = request.POST.get('isInSliderCheckBox') is not None
+        print(isInSliderCheckBox)
+        sliderImage.isInSlider = False if isInSliderCheckBox is None else isInSliderCheckBox
+        sliderImage.save()
+
+    return redirect('slider:admin_slider')
 
 def user_slider(request):
     sliderImages = SliderImage.objects.filter(isInSlider = True);
     print(sliderImages)
-    return render(request, 'user_slider.html', {'images': sliderImages})
+    return render(request, 'user_slider.html', {'slider_images': sliderImages})

@@ -2,60 +2,24 @@
 {% load static %}
 
 {% block content %}
+<div class="container">
 <h1>Admin Slider</h1>
-<form id="image-selection-form" method="post">
+{% csrf_token %}
+{% for slider_image in slider_images %}
+<form method="post" action="{% url 'slider:change_slider' slider_image.id %}">
     {% csrf_token %}
-    <ul>
-        {% for image in images %}
-            <li>
-                <img src="{{ image.image.url }}" alt="{{ image.title }}" width="150">
-                <p>{{ image.title }}</p>
-                <input type="checkbox" name="selected_images[]" value="{{ image.id }}" 
-                       {% if image.isInSlider %}checked{% endif %}>
-            </li>
-        {% endfor %}
-    </ul>
-    <button type="submit">Zapisz zmiany</button>
-</form>
-
-<!-- jQuery do obsługi formularza AJAX -->
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
-<script>
-    
-</script>
-
-
-<!-- <ul id="sortable">
-{% for item in images %}
-    <li data-id="{{ item.id }}">
-        <img src="{{ item.image.url }}" width="100" />
-    </li>
-    
-    <div class="card">
-        <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
-        <div class="description">
-            <h2>{{ photo.title }}</h2>
-            <p>{{ photo.description }}</p>
-        </div>
+    <div class="border p-3">
+        <img src="{{ slider_image.image.url }}" alt="{{ slider_image.title }}" width="150">
+        <p>title: {{ slider_image.title }}</p>
+        <p>description: {{ slider_image.description }}</p>
+        <label for="id_isInSlider">is in slider:</label>
+        <input id="id_isInSlider" type="checkbox" name="isInSliderCheckBox"
+                {% if slider_image.isInSlider %}checked{% endif %}>
+        <br>
+        <button class="btn border p-2" type="submit"> Save </button>
     </div>
 {% endfor %}
-</ul>
-<button onclick="saveOrder()">Save Order</button>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-    $(function() {
-        $("#sortable").sortable();
-    });
 
-    function saveOrder() {
-        var order = [];
-        $("#sortable li").each(function(index, element) {
-            order.push({ id: $(element).data("id"), order: index });
-        });
+</div> 
 
-        $.post("/admin/slider/", { order: JSON.stringify(order), csrfmiddlewaretoken: '{{ csrf_token }}' });
-    }
-</script> -->
 {% endblock content %}

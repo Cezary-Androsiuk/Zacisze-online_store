@@ -5,6 +5,7 @@ from slider.views import (
 
     upload_image,
     admin_slider,
+    change_slider_view,
     user_slider,
 )
 
@@ -17,5 +18,6 @@ urlpatterns = [
 
     path('upload/', upload_image, name='upload_image'),
     path('admin/slider/', admin_slider, name='admin_slider'),
+    path('change_slider/<int:slider_image_id>', change_slider_view, name='change_slider'),
     path('slider/', user_slider, name='user_slider'),
 ]

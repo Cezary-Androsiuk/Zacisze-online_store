@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block content %}
-<div class="slider">
-    {% for item in images %}
-    <div class="card" style="width: 100px; height: 300px;">
-        <img src="{{ item.image.url }}" class="slide" style="display:none;" />
+<div class="object-list">
+    {% for slider_image in slider_images %}
+    <div class="object-item">
+        <img src="{{ slider_image.image.url }}" alt="{{ slider_image.title }}">
+        <div class="description">
+        </div>
     </div>
     {% endfor %}
 </div>
@@ -14,30 +16,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
     $(document).ready(function(){
-        $('.slider').slick({
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
+        // $('.slider').slick({
+        //     infinite: true,
+        //     slidesToShow: 3,
+        //     slidesToScroll: 1,
+        //     autoplay: true,
+        //     autoplaySpeed: 2000,
+        //     responsive: [
+        //         {
+        //             breakpoint: 1024,
+        //             settings: {
+        //                 slidesToShow: 2,
+        //                 slidesToScroll: 1,
+        //                 infinite: true,
+        //             }
+        //         },
+        //         {
+        //             breakpoint: 600,
+        //             settings: {
+        //                 slidesToShow: 1,
+        //                 slidesToScroll: 1
+        //             }
+        //         }
+        //     ]
+        // });
 
         // function setEqualHeight() {
         //     var maxHeight = 0;
