@@ -259,9 +259,9 @@ class Comment(models.Model):
     def __str__(self):
         return f'target {self.product} by {self.user}'
 
-class Replay(models.Model):
-    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='replays', null=False, blank=False)
-    parentComment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replays', null=False, blank=False)
+class Reply(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='replies', null=False, blank=False)
+    parentComment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies', null=False, blank=False)
     content = models.TextField()
 
     def __str__(self):

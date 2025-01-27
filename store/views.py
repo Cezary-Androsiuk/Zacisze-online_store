@@ -26,7 +26,7 @@ def store_view(request):
         product.authors = product.authors[:50] + '...' if len(product.authors) > 50 else product.authors
         
         if request.user.is_staff:
-            relatedComments = Comment.objects.filter(product=product)
+            relatedComments = Comment.objects.filter(product=product, confirmed=False)
             product.containsNotConfirmedComments = relatedComments.count()
         else:
             product.containsNotConfirmedComments = 0
@@ -70,14 +70,24 @@ def create_product_view(request):
 
 def view_product_view(request, slug):
     context = {}
+    user = request.user
     product = get_object_or_404(Product, slug=slug)
-    if request.user.is_staff:
-        comments = Comment.objects.filter(product=product)
-    else:
-        comments = Comment.objects.filter(product=product, confirmed=True)
-    
+
+    all_comments = Comment.objects.filter(product=product)
+    out_comments = []
+
+    for comment in all_comments:
+        if user.is_staff: # staff stuff
+            out_comments.append(comment)
+
+        else: # auth user and guest stuff
+            # user could be None
+            current_user = user if user.is_authenticated else None
+            if comment.user == current_user or comment.confirmed == True:
+                out_comments.append(comment)
+
     context['product'] = product
-    context['comments'] = comments
+    context['comments'] = out_comments
     
     success_update_message = request.session.get('success_update_message')
     if success_update_message:
@@ -122,6 +132,24 @@ def edit_product_view(request, slug):
     return render(request, 'store/edit_product.html', context)
 
 
+def add_comment_view(request, slug):
+    user = request.user
+    if not user.is_authenticated or not user.is_staff:
+        return redirect('must_authenticate')
+    
+    product = get_object_or_404(Product, slug=slug)
+
+    if request.method == "POST":
+        content = request.POST.get('content')
+        if not content == '':
+            comment = Comment.objects.create(
+                user = user,
+                product = product,
+                content = content
+            )
+            comment.save()
+
+    return redirect('store:view_product', slug=comment.product.slug)
 
 def confirm_comment_view(request, comment_id):
     user = request.user
@@ -133,6 +161,24 @@ def confirm_comment_view(request, comment_id):
     comment.save()
     return redirect('store:view_product', slug=comment.product.slug)
 
+def add_reply_view(request, comment_id):
+    user = request.user
+    if not user.is_authenticated or not user.is_staff:
+        return redirect('must_authenticate')
+    
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.method == "POST":
+        content = request.POST.get('content')
+        if not content == '':
+            reply = Reply.objects.create(
+                user = user,
+                parentComment = comment,
+                content = content
+            )
+            reply.save()
+
+    return redirect('store:view_product', slug=comment.product.slug)
 
 
 def delete_product_view(request, slug):

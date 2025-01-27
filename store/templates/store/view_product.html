@@ -47,71 +47,82 @@
     </div>
     <br>
     <p class="lead text-muted" style="text-align: left; margin-left: 50px; margin-right: 50px; word-wrap: break-word; white-space: pre-wrap;">
-        {{product.description|safe}}
+        {{product.description}}        
+        {% comment %} {{product.description|safe}} {% endcomment %}
     </p>
     <br>
 
-    <div>
-        {% for comment in comments %}
-            <p>{{ comment.user.email }}</p>
-            <p>{{ comment.content }}</p>
-            {% if comment.confirmed is False %}
-                <p><small>Approved {{ comment.confirmed }}</small></p>
-                <form method="post" action="{% url 'store:confirm_comment' comment.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Approve</button>
-                </form>
-            {% endif %}
-            {% if not comment.replays.all %}
-            
+    <div class="border p-3">
+        <div class="border p-3">
+            {% if request.user.is_authenticated %}
+                <div class="add-comment">
+                    <form method="post" action="{% url 'store:add_comment' product.slug %}">
+                        {% csrf_token %}
+                        <textarea class="form-control" type="text" rows="5" name="content" required
+                            placeholder="Comment content..."></textarea>
+                        <button class="btn border p-2" type="submit"> Add comment </button>
+                    </form>
+                </div>
             {% else %}
-                {% for reply in comment.replays.all %}
-                    <p>{{ reply.user.email }}</p>
-                    <p>{{ reply.content }}</p>
-                {% endfor %}
+                <p> To add a comment 
+                    <a href="{% url 'login' %}">Login</a> or 
+                    <a href="{% url 'register' %}">Sign-up</a>
+                </p>
             {% endif %}
-        {% empty %}
-            <p>No comments yet.</p>
-        {% endfor %}
-
-        <!-- <h2>Comments</h2>
-        <h3>Add a Comment</h3>
-            <form method="post" action="">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" name="comment_form">Submit</button>
-            </form>
-
+        </div>
         {% for comment in comments %}
-            <div class="comment">
-                <p><strong>{{ comment.user.username }}</strong> said:</p>
+            <div class="border p-3">
+                <strong>{{ comment.user.email }}</strong>
                 <p>{{ comment.content }}</p>
-                <p><small>Posted on {{ comment.created_at }}</small></p>
-                {% if comment.reply %}
-                    <p><strong>Moderator reply:</strong> {{ comment.reply }}</p>
+                
+                {% comment %}
+                    visible only if comment was not confirmed
+                    and only staff can see not confirmed comments
+                {% endcomment %}
+                {% if comment.confirmed is False and request.user.is_staff %}
+                    <form method="post" action="{% url 'store:confirm_comment' comment.id %}">
+                        {% csrf_token %}
+                        <button class="btn border p-2" type="submit"> Confirm Comment </button>
+                    </form>
                 {% endif %}
-                {% if comment.approved is False %}
-                    <p><small>Approved {{ comment.approved }}</small></p>
-                    {% if permission_comments %}
-                        <div class="reply-form">
-                            <form method="post" action="{% url 'product_detail' product.id %}">
-                                {% csrf_token %}
-                                <textarea name="reply" rows="3" required></textarea>
-                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                                <button type="submit">Reply</button>
-                            </form>
-                        </div>
-                        <form method="post" action="{% url 'approve_comment' comment.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Approve</button>
-                        </form>
+                <br>
+                
+                {% if comment.replies.all.count != 0 or comment.confirmed is False %}
+                    {% comment %}
+                        visible only if comment was not confirmed
+                        and only staff can see not confirmed comments
+                    {% endcomment %}
+                    {% if request.user.is_staff %}
+                        {% if comment.confirmed is False %}
+                            <div class="border p-3">
+                                <div class="reply-form">
+                                    <form method="post" action="{% url 'store:add_reply' comment.id %}">
+                                        {% csrf_token %}
+                                        <textarea class="form-control" type="text" rows="5" name="content" required
+                                            placeholder="Reply content..."></textarea>
+                                        <button class="btn border p-2" type="submit"> Reply </button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                    {% else %}
+                        <p><small>Not confirmed</small></p>
+                    {% endif %}
+
+                    {% if comment.replies.all %}
+                        {% for reply in comment.replies.all %}
+                            <div class="border p-3">
+                                <p>{{ reply.user.email }}</p>
+                                <p>{{ reply.content }}</p>
+                            </div>
+                        {% endfor %}
                     {% endif %}
                 {% endif %}
             </div>
         {% empty %}
-            <p>No comments yet.</p>
-        {% endfor %} -->
-
+            <p>No comments</p>
+        {% endfor %}
 
     </div>
     
